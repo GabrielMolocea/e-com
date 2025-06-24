@@ -1,25 +1,28 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "./redux/products/productsSlice";
+import { selectAuthToken } from "./redux/selector";
+import LoginPage from "./components/LoginPage";
 
 function App() {
 	const dispatch = useDispatch();
-
+	const authToken = useSelector(selectAuthToken);
+  console.log(authToken);
+  
 
 	useEffect(() => {
-		dispatch(fetchAllProducts() as any);
-		dispatch(loginUsers({ username: "mor_2314", password: "83r5^_" }) as any);
+		dispatch(fetchProducts() as any);
 	}, []);
-
-	console.log("Products:", products);
-	console.log("token:", authTokken);
 
 	return (
 		<>
-			{/* <Route path="/login" element={<LoginPage />} /> */}
-			{loading ? (
-				<div>Loading...</div>
+			{authToken ? (
+				<div>
+					<h1>Welcome to the E-commerce App</h1>
+					<p>Your token: {authToken}</p>
+				</div>
 			) : (
-				<pre>{JSON.stringify(products, null, 2)}</pre>
+				<LoginPage />
 			)}
 		</>
 	);

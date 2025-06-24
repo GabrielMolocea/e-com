@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getProducts, getProductCategories } from '../../api'
 
 export interface Product {
   id: number
@@ -31,8 +31,8 @@ const initialState: ProductsState = {
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_, thunkAPI) => {
   try {
-    const response = await axios.get<Product[]>('https://fakestoreapi.com/products')
-    return response.data
+    const data = await getProducts()
+    return data
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data || 'Failed to fetch products')
   }
@@ -40,8 +40,8 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_
 
 export const fetchCategories = createAsyncThunk('products/fetchCategories', async (_, thunkAPI) => {
   try {
-    const response = await axios.get<string[]>('https://fakestoreapi.com/products/categories')
-    return response.data
+    const data = await getProductCategories()
+    return data
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data || 'Failed to fetch categories')
   }

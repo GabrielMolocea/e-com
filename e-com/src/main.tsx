@@ -1,13 +1,11 @@
-import { Provider } from 'react-redux'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import { configureStore } from '@reduxjs/toolkit'
+import { Provider } from "react-redux";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import { store } from "./redux/store";
 
-
-const store = configureStore({ reducer: rootReducer })
-createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-)
+createRoot(document.getElementById("root")!).render(
+	<Provider store={store}>
+		<App />
+	</Provider>
+);
