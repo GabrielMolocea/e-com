@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './auth/authSlice'
 import productsReducer from './products/productsSlice'
 import ratingsReducer from './ratings/ratingsSlice'
+import sortReducer from './sort/sortSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     products: productsReducer,
     ratings: ratingsReducer,
+    sortBy: sortReducer,
   },
 })
 

@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./redux/products/productsSlice";
 import { selectAuthToken } from "./redux/selector";
 import LoginPage from "./components/LoginPage";
+import Header from "./components/header";
+import SortButtons from "./components/SortButtons";
+import ProductElements from "./components/ProductElements";
 
 function App() {
 	const dispatch = useDispatch();
 	const authToken = useSelector(selectAuthToken);
-  console.log(authToken);
-  
 
 	useEffect(() => {
 		dispatch(fetchProducts() as any);
@@ -18,8 +19,9 @@ function App() {
 		<>
 			{authToken ? (
 				<div>
-					<h1>Welcome to the E-commerce App</h1>
-					<p>Your token: {authToken}</p>
+					<Header />
+					<SortButtons />
+          <ProductElements />
 				</div>
 			) : (
 				<LoginPage />
